@@ -1,0 +1,48 @@
+﻿@model MvcApplication2.Models.UserProfile
+
+@{
+    ViewBag.Title = "Add User";
+}
+
+<h2>AddUser</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>UserProfile</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserName)
+        </div>
+        <!-- Need to validate that proposed username is not already in use -->
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+
+        @*<div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>*@
+
+        <div class="editor-label">
+            <label>Password</label>
+        </div>
+        <div class="editor-field">
+            <input />
+        </div>
+
+        <p>
+            <input type="submit" value="AddUser" />
+        </p>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

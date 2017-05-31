@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Landing / Login Page";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                Please <a href="/Account/Login">Login</a> or <a href="/Account/Register">Register</a> to use this service.
+            </p>
+            <p>
+                <a href="/Account/Login">Forgot Password</a>
+            </p>
+        </div>
+    </section>
+}
+<h3>Why use this Site?</h3>
+<ol class="round">
+    <li class="one">
+        <h5>Easy to use</h5>
+        Easy as 1, 2, 3.
+        <a href="http://www.nasa.gov">Learn more…</a>
+    </li>
+
+    <li class="two">
+        <h5>Safe and secure</h5>
+        Your contacts are protected by SHA256.
+        <a href="http://www.nasa.gov">Learn more…</a>
+    </li>
+
+    <li class="three">
+        <h5>Portable</h5>
+        Access from anywhere.
+        <a href="http://www.nasa.gov">Learn more…</a>
+    </li>
+</ol>

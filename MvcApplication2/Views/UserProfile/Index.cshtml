@@ -1,0 +1,13 @@
+﻿@model MvcApplication2.Models.UserProfile
+
+@{
+    ViewBag.Title = "Your Profile";
+}
+
+<h2>@ViewBag.Title</h2>
+<section>
+    <ul>
+        <li>@Html.ActionLink("Change Password", "Manage", "Account")</li>
+        <li>@Html.ActionLink("Change Personal Information", "About", "Home")</li>
+    </ul>
+</section>

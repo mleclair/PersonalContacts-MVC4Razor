@@ -1,0 +1,88 @@
+﻿@model IEnumerable<MvcApplication2.Models.PersonalContactModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@if ( !string.IsNullOrWhiteSpace(User.Identity.Name))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <section id="PersonalContacts" style="float:left;">
+        <table class="PersonalContacts">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HomePhone)
+                </th>
+            </tr>
+        @if (Model != null && Model.Count() > 0) {
+            foreach (var item in Model) {
+                <tr data-persoanlcontactid="@item.Id">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HomePhone)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id=item.Id }) | 
+                        @Html.ActionLink("Delete", "Delete", new { id=item.Id}) |
+                        <a href="javascript:getCkEditor(@item.Id);">Notes</a>
+                    </td>
+                </tr>
+            }
+        }
+        </table>
+    </section>
+    <div id="NotesContainer" style="height:auto; width:auto; float:left; clear:left; position:relative; padding-top:12px;"></div>
+    <script type="text/javascript">
+        function getCkEditor(parameter) {
+            var url = "@Html.Raw(Url.Action("Notes", "PersonalContact"))";
+            url = url + "?personalContactId=" + parameter;
+            $('#NotesContainer').attr("data-personalcontactid" , parameter ).load(url);
+            return;
+        }
+        function saveNote() {
+            if ( CKEDITOR && CKEDITOR.instances && CKEDITOR.instances.editor1 )
+            {
+                var data = CKEDITOR.instances.editor1.getData();
+
+                var personalContactId = $('#NotesContainer').attr("data-personalcontactid");
+
+                if ( personalContactId && data && data.length > 0 )
+                {
+                    var url = "@Html.Raw( Url.Action( "SaveNotes" , "PersonalContact" ) )";
+
+                    var note = $( "<div/>" ).text( data ).html( );
+
+                    url = url + "?PersonalContactId=" + personalContactId;
+
+                    $.ajax({
+                        url: url,
+                        method: 'POST',
+                        data: note
+                    });
+                }
+
+                closeNote();
+
+                return;
+            }
+        }
+        function closeNote() {
+            $('#NotesContainer').empty();
+            return;
+        }
+    </script>
+}

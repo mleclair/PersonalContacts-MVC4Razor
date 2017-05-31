@@ -1,0 +1,31 @@
+﻿@model MvcApplication2.Models.PersonalContactModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/CkEditor/ckeditor.js"></script>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>
+                <textarea name="editor1" id="editor1" rows="10" cols="80">
+                    @if (!string.IsNullOrWhiteSpace(Model.Notes))
+                    {
+                        @Html.Raw(Model.Notes)
+                    }
+                </textarea>
+            </td>
+            <td>
+                <a href="javascript:saveNote();">Save</a>
+                <a href="javascript:closeNote();">Close</a>
+            </td>
+        </tr>
+    </table>
+    <script>
+        // Replaces #editor1 with CKEditor instance using default configuration.
+        CKEDITOR.replace('editor1');
+    </script>
+</body>
+</html>
